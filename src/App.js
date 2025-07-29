@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Layout from './components/Layout';
+import Layout from './components/layout';
 import Home from './pages/Home';
-import PageA from './pages/PageA';
-import PageB from './pages/PageB';
-import PageC from './pages/PageC';
+import PageA from './pages/Nosotros';
+import PageB from './pages/Contacto';
+import PageC from './pages/Paquetes';
+import PageD from './pages/Requisitos';
 
 function App() {
   return (
@@ -15,19 +16,24 @@ function App() {
             <Home />
           </Layout>
         } />
-        <Route path="/a" element={
+        <Route path="/nosotros" element={
           <Layout>
             <PageA />
           </Layout>
         } />
-        <Route path="/b" element={
+        <Route path="/contacto" element={
           <Layout>
             <PageB />
           </Layout>
         } />
-        <Route path="/c" element={
+        <Route path="/paquetes" element={
           <Layout>
             <PageC />
+          </Layout>
+        } />
+        <Route path="/requisitos" element={
+          <Layout>
+            <PageD />
           </Layout>
         } />
       </Routes>
