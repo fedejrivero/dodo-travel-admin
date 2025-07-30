@@ -11,6 +11,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+    height: 10vh;
 }
 
 .nav-links {
@@ -38,7 +39,17 @@
     border-bottom: 2px solid #61dafb;
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
 .logo {
     width: 100px;
     height: 100px;
+}
+
+.dodo-travel {
+    width: 250px;
+    height: 250px;
 }

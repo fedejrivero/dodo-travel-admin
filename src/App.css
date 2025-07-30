@@ -80,3 +80,5 @@ body {
 @import "./components/banner/index.scss"; 
 @import "./components/navBar/index.scss"; 
 @import "./components/layout/index.scss"; 
+@import "./components/sections/index.scss"; 
+@import "./components/title/index.scss"; 
