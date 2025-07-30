@@ -6,6 +6,7 @@ import PageA from './pages/Nosotros';
 import PageB from './pages/Contacto';
 import PageC from './pages/Paquetes';
 import PageD from './pages/Requisitos';
+import AgregarPaquete from './pages/AgregarPaquete';
 
 function App() {
   return (
@@ -34,6 +35,11 @@ function App() {
         <Route path="/requisitos" element={
           <Layout>
             <PageD />
+          </Layout>
+        } />
+        <Route path="/paquetes/agregar" element={
+          <Layout>
+            <AgregarPaquete />
           </Layout>
         } />
       </Routes>
