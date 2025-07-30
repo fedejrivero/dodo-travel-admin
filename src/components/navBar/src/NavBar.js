@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from '../../../images/logo.png';
 import plumas from '../../../images/plumas.png';
-import dodoTravel from '../../../images/dodoTravel.png';
+import dodoTravel from '../../../images/dodoTravelBlue.png';
 
 const NavBar = () => (
   <nav className="navbar" style={{ backgroundImage: `url(${plumas})`}}>

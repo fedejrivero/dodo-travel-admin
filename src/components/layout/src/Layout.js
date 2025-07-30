@@ -1,11 +1,15 @@
 import NavBar from '../../navBar/index';
+import Footer from '../../footer';
 import { FloatingWhatsApp } from 'react-floating-whatsapp';
 import logoWP from '../../../images/logoWP.jpg';
 
 const Layout = ({ children }) => (
   <div className="app-container">
     <NavBar />
-    {children}
+    <main className="main-content">
+      {children}
+    </main>
+    <Footer />
     <FloatingWhatsApp 
       phoneNumber="5493513719249"
       accountName="Dodo Travel"
