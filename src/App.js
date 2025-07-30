@@ -2,10 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Layout from './components/layout';
 import Home from './pages/Home';
-import PageA from './pages/Nosotros';
-import PageB from './pages/Contacto';
-import PageC from './pages/Paquetes';
-import PageD from './pages/Requisitos';
+import Nosotros from './pages/Nosotros';
+import Contacto from './pages/Contacto';
+import Paquetes from './pages/Paquetes';
+import Requisitos from './pages/Requisitos';
 import AgregarPaquete from './pages/AgregarPaquete';
 
 function App() {
@@ -19,22 +19,22 @@ function App() {
         } />
         <Route path="/nosotros" element={
           <Layout>
-            <PageA />
+            <Nosotros />
           </Layout>
         } />
         <Route path="/contacto" element={
           <Layout>
-            <PageB />
+            <Contacto />
           </Layout>
         } />
         <Route path="/paquetes" element={
           <Layout>
-            <PageC />
+            <Paquetes />
           </Layout>
         } />
         <Route path="/requisitos" element={
           <Layout>
-            <PageD />
+            <Requisitos />
           </Layout>
         } />
         <Route path="/paquetes/agregar" element={

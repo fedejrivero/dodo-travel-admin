@@ -1,4 +1,4 @@
-import Section from './src/Section';
-import Sections from './src/Sections';
+import Categories from './src/Categories';
+import Products from './src/Products';
 
-export { Section, Sections };
+export { Categories, Products };

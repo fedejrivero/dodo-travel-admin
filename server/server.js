@@ -1,10 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 // Import routes
 const tripRoutes = require('./routes/tripRoutes');
+const { uploadSingle, getFileUrl, cleanupUploadedFiles } = require('./utils/fileUpload');
 
 // Initialize express
 const app = express();
@@ -16,6 +18,28 @@ app.use(express.urlencoded({ extended: true }));
 
 // API Routes
 app.use('/api/trips', tripRoutes);
+
+// Serve uploaded files
+app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
+
+// Image upload endpoint
+app.post('/api/upload', uploadSingle('image'), (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No se proporcionó ninguna imagen' });
+    }
+    
+    const fileUrl = getFileUrl(req.file.filename);
+    res.status(200).json({ 
+      success: true, 
+      imageUrl: fileUrl,
+      filename: req.file.filename
+    });
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    res.status(500).json({ error: 'Error al subir la imagen' });
+  }
+});
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

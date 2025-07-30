@@ -1,8 +1,7 @@
 import Banner from '../components/banner';
 import plumas from '../images/plumas.png';
-import { Sections } from '../components/sections';
 import Divider from '../components/divider';
-import { sections, sections2 } from '../components/sections/data/sections';
+import { Categories, Products } from '../components/sections/index';
 
 const Home = () => (
   <div className="home-page" style={{ backgroundImage: `url(${plumas})`}}>
@@ -10,13 +9,11 @@ const Home = () => (
     <h1>Bienvenidos a Dodo Travel</h1>
     {/* <p>Seleccione una seccion de la navegacion superior</p> */}
     
-    <Sections sections={sections} />
+    <Categories />
 
     <Divider text="Consultanos por otros productos" />
 
-    <div className="secondary-section">
-      <Sections sections={sections2} />
-    </div>
+    <Products />
   </div>
 );
 

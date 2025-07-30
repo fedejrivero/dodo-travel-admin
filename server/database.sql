@@ -5,18 +5,20 @@ USE dodo_travel;
 -- Create trips table
 CREATE TABLE IF NOT EXISTS trips (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  description TEXT,
-  destination VARCHAR(255) NOT NULL,
-  start_date DATE NOT NULL,
-  end_date DATE NOT NULL,
-  price DECIMAL(10, 2) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  category ENUM('Nacional Bus', 'Nacional Aereo', 'Internacional', 'Grupal') NOT NULL,
+  dates JSON NOT NULL,
+  price INT NOT NULL,
+  currency ENUM('USD', '$') NOT NULL,
+  amenities JSON,
+  image_url VARCHAR(512),
+  image_filename VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Insert sample data
-INSERT INTO trips (title, description, destination, start_date, end_date, price) VALUES
-('Beach Paradise', 'Relax on beautiful beaches', 'Maldives', '2024-01-15', '2024-01-22', 2500.00),
-('Mountain Adventure', 'Hiking and nature exploration', 'Swiss Alps', '2024-02-10', '2024-02-20', 3200.00),
-('City Break', 'Explore the city life', 'New York', '2024-03-05', '2024-03-12', 1800.00);
+INSERT INTO trips (name, category, dates, price, currency, amenities) VALUES
+('Paquete Playa', 'Nacional Aereo', '["2024-01-15", "2024-01-22"]', 250000, '$', '["Desayuno incluido", "Traslado aeropuerto", "Asistencia médica"]'),
+('Aventura en la Montaña', 'Nacional Bus', '["2024-02-10", "2024-02-20"]', 180000, '$', '["Guía turístico", "Almuerzo incluido", "Seguro de viaje"]'),
+('Europa Clásica', 'Internacional', '["2024-03-05", "2024-03-20"]', 3200, 'USD', '["Vuelos internacionales", "Hoteles 4 estrellas", "Tours guiados"]');
