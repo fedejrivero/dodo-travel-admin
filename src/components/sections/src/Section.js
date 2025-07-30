@@ -1,7 +1,10 @@
 import Title from "../../title";
 
-const Section = ({title, description, image}) => (
-  <section className="section" style={{ backgroundImage: `url(${image})`}}>
+const Section = ({title, image}) => (
+  <section 
+    className="section"
+    style={{ backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: "center" }}
+  >
     <Title text={title} />
   </section>
 );

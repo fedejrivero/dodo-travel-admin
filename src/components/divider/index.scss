@@ -1,0 +1,18 @@
+.divider {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    color: #ffffff;
+}
+
+.divider-text {
+    width: 90vw;
+    padding: 4px 12px;  
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff !important;
+    background-color: #043e53;
+    border-radius: 24px;
+}

@@ -15,15 +15,8 @@ const Layout = ({ children }) => (
       allowClickAway
       notification
       notificationSound
-      notificationTitle="Hola, ¿en qué puedo ayudarte?"
-      notificationSubTitle="Hola, ¿en qué puedo ayudarte?"
-      notificationBadge="Hola, ¿en qué puedo ayudarte?"
-      notificationBadgeColor="red"
-      notificationBadgeBackgroundColor="red"
-      notificationBadgeTextColor="white"
-      notificationBadgeFontSize="12px"
       placeholder="Hola, queria consultar sobre ..."
-      statusMessage='Te ayudamos a volar'
+      statusMessage='Te ayudamos a volar!'
     />
   </div>
 );
