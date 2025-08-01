@@ -1,4 +1,3 @@
-import Banner from '../components/banner';
 import Divider from '../components/divider';
 import { Categories, Products } from '../components/sections/index';
 

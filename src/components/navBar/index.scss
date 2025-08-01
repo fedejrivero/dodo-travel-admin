@@ -47,7 +47,7 @@
     color: #043e53;
     text-decoration: none;
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 600;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     transition: all 0.3s ease;
@@ -109,18 +109,6 @@
     .nav-links.active {
         max-height: 500px;
         padding: 1rem;
-    }
-      
-    .nav-link {
-        color: #043e53;
-        text-decoration: none;
-        font-size: 1.1rem;
-        font-weight: 500;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        transition: all 0.3s ease;
-        display: block;
-        text-align: center;
     }
       
     .nav-link:hover,

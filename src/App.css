@@ -65,6 +65,13 @@ body {
   }
 }
  
+
+/* Pages */
+@import "./pages/Nosotros.css"; 
+@import "./pages/Paquetes.css"; 
+
+/* Components */
+
 @import "./components/banner/index.scss"; 
 @import "./components/navBar/index.scss"; 
 @import "./components/layout/index.scss"; 
