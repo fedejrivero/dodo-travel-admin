@@ -7,6 +7,7 @@ import Contacto from './pages/Contacto';
 import Paquetes from './pages/Paquetes';
 import Requisitos from './pages/Requisitos';
 import AgregarPaquete from './pages/AgregarPaquete';
+import Banner from './components/banner';
 
 function App() {
   return (
@@ -14,32 +15,45 @@ function App() {
       <Routes>
         <Route path="/" element={
           <Layout>
-            <Home />
+            <Banner />
+            <main className="main-content">
+              <Home />
+            </main>
           </Layout>
         } />
         <Route path="/nosotros" element={
           <Layout>
-            <Nosotros />
+            <main className="main-content">
+              <Nosotros />
+            </main>
           </Layout>
         } />
         <Route path="/contacto" element={
           <Layout>
-            <Contacto />
+            <main className="main-content">
+              <Contacto />
+            </main>
           </Layout>
         } />
         <Route path="/paquetes" element={
           <Layout>
-            <Paquetes />
+            <main className="main-content">
+              <Paquetes />
+            </main>
           </Layout>
         } />
         <Route path="/requisitos" element={
           <Layout>
-            <Requisitos />
+            <main className="main-content">
+              <Requisitos />
+            </main>
           </Layout>
         } />
         <Route path="/paquetes/agregar" element={
           <Layout>
-            <AgregarPaquete />
+            <main className="main-content">
+              <AgregarPaquete />
+            </main>
           </Layout>
         } />
       </Routes>

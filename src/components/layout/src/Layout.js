@@ -6,9 +6,7 @@ import logoWP from '../../../images/logoWP.jpg';
 const Layout = ({ children }) => (
   <div className="app-container">
     <NavBar />
-    <main className="main-content">
-      {children}
-    </main>
+    {children}
     <Footer />
     <FloatingWhatsApp 
       phoneNumber="5493513719249"

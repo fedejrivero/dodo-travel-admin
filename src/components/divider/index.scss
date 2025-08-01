@@ -1,5 +1,5 @@
 .divider {
-    width: auto;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,8 +8,9 @@
 }
 
 .divider-text {
-    width: 90vw;
+    width: 90%;
     padding: 4px 12px;  
+    text-align: center;
     font-size: 20px;
     font-weight: bold;
     color: #ffffff !important;
