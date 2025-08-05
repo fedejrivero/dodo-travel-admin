@@ -36,10 +36,15 @@
         gap: 1rem;
         flex-direction: row; 
     }
+}
 
-    .dodo {
-        width: 50px;
-        height: 50px;
-        object-fit: contain;
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .footer {
+        .dodo-travel {
+            width: 100px;
+            height: 100px;
+        }
     }
 }

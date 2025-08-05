@@ -193,7 +193,7 @@ const AgregarPaquete = () => {
   };
 
   return (
-    <div className="add-package-container">
+    <div className="page-content add-package-container">
       <div className="add-package-card">
         <h1>Nuevo Paquete Turístico</h1>
         

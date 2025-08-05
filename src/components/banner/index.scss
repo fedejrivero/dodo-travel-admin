@@ -16,3 +16,10 @@
     width: 60vh;
     height: 60vh;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .banner {
+        margin-bottom: 0;
+    }
+}
