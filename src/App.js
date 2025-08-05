@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Layout from './components/Layout';
+import Layout from './components/layout';
 import Home from './pages/Home';
-import PageA from './pages/PageA';
-import PageB from './pages/PageB';
-import PageC from './pages/PageC';
+import Nosotros from './pages/Nosotros';
+import Contacto from './pages/Contacto';
+import Paquetes from './pages/Paquetes';
+import Requisitos from './pages/Requisitos';
+import AgregarPaquete from './pages/AgregarPaquete';
 
 function App() {
   return (
@@ -15,19 +17,29 @@ function App() {
             <Home />
           </Layout>
         } />
-        <Route path="/a" element={
+        <Route path="/nosotros" element={
           <Layout>
-            <PageA />
+            <Nosotros />
           </Layout>
         } />
-        <Route path="/b" element={
+        <Route path="/contacto" element={
           <Layout>
-            <PageB />
+            <Contacto />
           </Layout>
         } />
-        <Route path="/c" element={
+        <Route path="/paquetes" element={
           <Layout>
-            <PageC />
+            <Paquetes />
+          </Layout>
+        } />
+        <Route path="/requisitos" element={
+          <Layout>
+            <Requisitos />
+          </Layout>
+        } />
+        <Route path="/paquetes/agregar" element={
+          <Layout>
+            <AgregarPaquete />
           </Layout>
         } />
       </Routes>

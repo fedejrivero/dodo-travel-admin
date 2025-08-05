@@ -1,0 +1,56 @@
+
+/* Navigation Bar */
+.navbar {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 15vh;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+  
+.nav-link {
+    color: #043e53;;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+  
+.nav-link:hover {
+    color: #ffffff;
+    background-color: #043e53;;
+}
+
+.nav-link.active {
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.dodo-travel {
+    width: 250px;
+    height: 250px;
+}

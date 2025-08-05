@@ -1,0 +1,45 @@
+.footer {
+    background-color: #043e53;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    overflow: hidden;
+
+    .dodo-travel {
+        width: 200px;
+        height: 200px;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .footer-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        flex-direction: row; 
+    }
+
+    .dodo {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
+}
