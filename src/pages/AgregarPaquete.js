@@ -99,7 +99,7 @@ const AgregarPaquete = () => {
       formData.append('image', file);
       
       // Upload the file
-      const response = await fetch('http://localhost:5001/api/upload', {
+      const response = await fetch('http://srv942210.hstgr.cloud:5001/api/upload', {
         method: 'POST',
         body: formData,
       });
