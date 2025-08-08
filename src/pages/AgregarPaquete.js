@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { uploadImage } from '../services/tripService';
 import { useNavigate } from 'react-router-dom';
 import { createTrip } from '../services/tripService';
 import './AgregarPaquete.css';
@@ -94,22 +95,10 @@ const AgregarPaquete = () => {
     try {
       setUploadingImage(true);
       
-      // Create form data
-      const formData = new FormData();
-      formData.append('image', file);
-      
-      // Upload the file
-      const response = await fetch('http://srv942210.hstgr.cloud:5001/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Error al subir la imagen');
-      }
-      
-      const { imageUrl, filename } = await response.json();
+      // Use the tripService to upload the image
+      const { imageUrl, filename } = await uploadImage(file);
+
+      console.log('Filename:', filename);
       
       setFormData(prev => ({
         ...prev,

@@ -1,4 +1,4 @@
-const API_URL = 'http://srv942210.hstgr.cloud:5001/api';
+const API_URL = 'http://localhost:5001/api';
 
 // Helper function to handle API responses
 const handleResponse = async (response) => {
@@ -95,4 +95,21 @@ export const deleteTrip = async (id) => {
     console.error(`Error deleting trip with id ${id}:`, error);
     throw error;
   }
+};
+
+export const uploadImage = async (file) => {
+  const formData = new FormData();
+  formData.append('image', file);
+  
+  const response = await fetch(`${API_URL}/upload`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || 'Error al subir la imagen');
+  }
+  
+  return response.json();
 };
