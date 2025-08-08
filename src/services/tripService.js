@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5001/api';
+const API_URL = 'https://srv942210.hstgr.cloud/api';
 
 // Helper function to handle API responses
 const handleResponse = async (response) => {
