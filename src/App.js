@@ -1,62 +1,76 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import Login from './pages/auth/Login';
 import './App.css';
 import Layout from './components/layout';
-import Home from './pages/Home';
-import Nosotros from './pages/Nosotros';
-import Contacto from './pages/Contacto';
-import Paquetes from './pages/Paquetes';
-import Requisitos from './pages/Requisitos';
-import AgregarPaquete from './pages/AgregarPaquete';
-import Banner from './components/banner';
+import Trip from './pages/trips/Trip';
+import Trips from './pages/trips/Trips';
+
+const AppContent = () => {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    return <div className="loading-container">Cargando...</div>;
+  }
+
+  return (
+    <Routes>
+      <Route path="/login" element={
+        isAuthenticated ? <Navigate to="/" replace /> : <Login />
+      } />
+      
+      <Route path="/" element={
+        <ProtectedRoute>
+          <Layout>
+            <main className="main-content">
+              <Trips />
+            </main>
+          </Layout>
+        </ProtectedRoute>
+      } />
+      
+      <Route path="/paquetes" element={
+        <ProtectedRoute>
+          <Layout>
+            <main className="main-content">
+              <Trips />
+            </main>
+          </Layout>
+        </ProtectedRoute>
+      } />
+      
+      <Route path="/paquete/nuevo" element={
+        <ProtectedRoute>
+          <Layout>
+            <main className="main-content">
+              <Trip />
+            </main>
+          </Layout>
+        </ProtectedRoute>
+      } />
+      
+      <Route path="/paquete/:id" element={
+        <ProtectedRoute>
+          <Layout>
+            <main className="main-content">
+              <Trip />
+            </main>
+          </Layout>
+        </ProtectedRoute>
+      } />
+      
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+};
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={
-          <Layout>
-            <Banner />
-            <main className="main-content">
-              <Home />
-            </main>
-          </Layout>
-        } />
-        <Route path="/nosotros" element={
-          <Layout>
-            <main className="main-content">
-              <Nosotros />
-            </main>
-          </Layout>
-        } />
-        <Route path="/contacto" element={
-          <Layout>
-            <main className="main-content">
-              <Contacto />
-            </main>
-          </Layout>
-        } />
-        <Route path="/paquetes" element={
-          <Layout>
-            <main className="main-content">
-              <Paquetes />
-            </main>
-          </Layout>
-        } />
-        <Route path="/requisitos" element={
-          <Layout>
-            <main className="main-content">
-              <Requisitos />
-            </main>
-          </Layout>
-        } />
-        <Route path="/paquetes/agregar" element={
-          <Layout>
-            <main className="main-content">
-              <AgregarPaquete />
-            </main>
-          </Layout>
-        } />
-      </Routes>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
     </Router>
   );
 }

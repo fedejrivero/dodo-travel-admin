@@ -1,19 +1,7 @@
 import { format, parseISO } from 'date-fns';
 import emptyImage from '../../../images/emptyImage.jpg';
+import { useNavigate } from 'react-router-dom';
 
-const formatDateRange = (dates) => {
-  if (!dates || dates.length === 0) return 'Sin fechas definidas';
-  
-  const sortedDates = [...dates].sort();
-  const startDate = format(parseISO(sortedDates[0]), 'dd/MM/yyyy');
-  
-  if (sortedDates.length === 1) {
-    return startDate;
-  }
-  
-  const endDate = format(parseISO(sortedDates[sortedDates.length - 1]), 'dd/MM/yyyy');
-  return `${startDate} - ${endDate}`;
-};
 const formatPrice = (price, currency) => {
   const formatter = new Intl.NumberFormat('es-AR', {
     style: 'currency',
@@ -28,51 +16,58 @@ const formatPrice = (price, currency) => {
   return formatter.format(price);
 };
 
-const getCategoryClass = (category) => {
-  if (!category) return '';
-  return category.toLowerCase().replace(/\s+/g, '-');
-};
-
-const Trip = ({trip}) => (
- <div key={trip.id} className="trip-card">
-    <div className="trip-card-header">
+const Trip = ({
+  id,
+  image_url,
+  name,
+  dates,
+  amenities,
+  price,
+  currency,
+  onDeleteTrip
+}) => {
+  const navigate = useNavigate();
+  
+  return (
+  <div key={id} className="trip-card">
+    {id}
       <section 
-        className="section"
-        style={{ backgroundImage: `url(${trip.image_url || emptyImage})`, backgroundSize: "cover", backgroundPosition: "center" }}
-      >
-        <span className={`trip-category ${getCategoryClass(trip.category)}`}>
-          {trip.category}
-        </span>
-      </section>
-    </div>
-    
-    <div className="trip-card-content">
+        className="trip-image"
+        style={{ backgroundImage: `url(${image_url || emptyImage})`, backgroundSize: "cover", backgroundPosition: "center" }}
+      />
+      
       <div className="trip-card-title">
-        <h3>{trip.name}</h3>
+        <h3>{name}</h3>
       </div>
       <div className="trip-dates">
-        <h4>Salidas:</h4>
-        {formatDateRange(trip.dates)}
+        <ul>
+          {dates.map(date => (
+            <li className="trip-date" key={date}>{format(parseISO(date), 'dd/MM/yyyy')}</li>
+          ))}
+        </ul>
       </div>
-     
-      {trip.amenities && trip.amenities.length > 0 && (
+      
+      {amenities && amenities.length > 0 && (
         <div className="trip-amenities">
-          <h4>Incluye:</h4>
           <ul>
-            {trip.amenities.map((amenity, index) => (
+            {amenities.map((amenity, index) => (
               <li className="trip-amenity" key={index}>{amenity}</li>
             ))}
           </ul>
         </div>
       )}
-    </div>
 
-    <div className="trip-card-footer">
       <div className="trip-price">
-        {formatPrice(trip.price, trip.currency)}
+        {formatPrice(price, currency)}
+      </div>
+
+      <div className="trip-actions">
+        <button onClick={() => navigate(`/paquete/${id}`)}>Editar</button>
+        <button>Deshabilitar</button>
+        <button onClick={onDeleteTrip}>Eliminar</button>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Trip;

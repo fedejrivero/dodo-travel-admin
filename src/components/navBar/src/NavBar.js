@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 import logo from '../../../images/logo.png';
 import plumas from '../../../images/plumas.png';
-import dodoTravel from '../../../images/dodoTravel.png';
+import dodoTravelWhite from '../../../images/dodoTravelWhite.png';
 import useIsMobile from '../../../hooks/useIsMobile';
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    closeMenu();
+    navigate('/login');
+  };
 
   // Toggle mobile menu
   const toggleMenu = () => {
@@ -39,17 +48,15 @@ const NavBar = () => {
       <Link to="/paquetes" className="nav-link" onClick={closeMenu}>
         Paquetes
       </Link>
-      <Link to="/nosotros" className="nav-link" onClick={closeMenu}>
-        Nosotros
-      </Link>
-      {/* Uncomment and add more links as needed */}
-      {/*
-      <Link to="/contacto" className="nav-link" onClick={closeMenu}>
-        Contacto
-      </Link>
-      <Link to="/requisitos" className="nav-link" onClick={closeMenu}>
-        Requisitos
-      </Link> */}
+      {user && (
+        <button 
+          className="logout-button" 
+          onClick={handleLogout}
+          aria-label="Cerrar sesión"
+        >
+          Cerrar sesión
+        </button>
+      )}
     </div>
   );
 
@@ -60,8 +67,7 @@ const NavBar = () => {
     >
       <div className="navbar-header">
         <Link to="/" className="logo-container" onClick={closeMenu}>
-          <img src={logo} alt="Logo" className="logo" />
-          <img src={dodoTravel} alt="Dodo Travel" className="dodo-travel" />
+          <img src={dodoTravelWhite} alt="Dodo Travel" className="dodo-travel" />
         </Link>
         
         {isMobile ? (

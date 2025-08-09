@@ -1,9 +1,9 @@
-.paquetes-container {
+.trips-container {
   padding: 2rem;
   max-width: 1200px;
 }
 
-.paquetes-header {
+.trips-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,12 +12,12 @@
   gap: 1rem;
 }
 
-.paquetes-header h1 {
+.trips-header h1 {
   margin: 0;
   color: #2c3e50;
 }
 
-.add-package-btn {
+.add-trip-btn {
   background-color: #3498db;
   color: white;
   border: none;
@@ -33,7 +33,7 @@
   text-decoration: none;
 }
 
-.add-package-btn:hover {
+.add-trip-btn:hover {
   background-color: #2980b9;
 }
 
@@ -93,12 +93,12 @@
 }
 
 @media (max-width: 768px) {
-  .paquetes-header {
+  .trips-header {
     flex-direction: column;
     align-items: flex-start;
   }
   
-  .add-package-btn {
+  .add-trip-btn {
     width: 100%;
     justify-content: center;
   }
@@ -109,19 +109,6 @@
   flex-wrap: wrap;
   gap: 2rem;
   padding: 1rem 0;
-}
-
-.trip-card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.trip-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .trip-image {

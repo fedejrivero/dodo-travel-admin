@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { getTrips } from '../services/tripService';
-import './Paquetes.css';
-import Trip from '../components/trip';
+import { getTrips, deleteTrip } from '../../services/tripService';
+import './Trips.css';
+import Trip from '../../components/trip';
 
 const CATEGORIES = ['Nacional Bus', 'Nacional Aereo', 'Internacional', 'Grupal'];
 
-const Paquetes = () => {
+const Trips = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [trips, setTrips] = useState([]);
@@ -53,6 +53,16 @@ const Paquetes = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleDeleteTrip = async (id) => {
+    try {
+      await deleteTrip(id);
+      setTrips(prev => prev.filter(trip => trip.id !== id));
+    } catch (err) {
+      setError('Error al eliminar el paquete. Por favor, intente nuevamente.');
+      console.error('Error deleting trip:', err);
+    }
+  };
+
   if (loading) {
     return <div className="page-content loading">Cargando paquetes...</div>;
   }
@@ -62,15 +72,15 @@ const Paquetes = () => {
   }
 
   return (
-    <div className="page-content paquetes-container">
-      <div className="paquetes-header">
-        <h1>Nuestros Paquetes</h1>
-        {/* <button 
-          className="add-package-btn"
-          onClick={() => navigate('/paquetes/agregar')}
+    <div className="page-content trips-container">
+      <div className="trips-header">
+        <h1>Paquetes</h1>
+        <button 
+          className="add-trip-btn"
+          onClick={() => navigate('/paquete/nuevo')}
         >
           + Nuevo Paquete
-        </button> */}
+        </button>
       </div>
       
       {/* Category Filter */}
@@ -102,7 +112,11 @@ const Paquetes = () => {
             </div>
           ) : (
             filteredTrips.map((trip) => (
-            <Trip key={trip.id} trip={trip} />
+            <Trip 
+              key={trip.id}
+              {...trip}
+              onDeleteTrip={() => handleDeleteTrip(trip.id)}
+            />
             ))
           )}
         </div>
@@ -111,4 +125,4 @@ const Paquetes = () => {
   );
 };
 
-export default Paquetes;
+export default Trips;

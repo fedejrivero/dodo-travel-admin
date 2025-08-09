@@ -1,4 +1,4 @@
-.add-package-container {
+.add-trip-container {
   padding: 2rem 1rem;
   display: flex;
   justify-content: center;
@@ -6,7 +6,7 @@
   background-color: #f5f7fa;
 }
 
-.add-package-card {
+.add-trip-card {
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -15,7 +15,7 @@
   max-width: 800px;
 }
 
-.add-package-card h1 {
+.add-trip-card h1 {
   color: #2c3e50;
   margin-bottom: 2rem;
   text-align: center;
@@ -418,17 +418,17 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .add-package-container {
+  .add-trip-container {
     padding: 1rem 0.75rem;
   }
   
-  .add-package-card {
+  .add-trip-card {
     padding: 1.5rem;
     border-radius: 0;
     box-shadow: none;
   }
   
-  .add-package-card h1 {
+  .add-trip-card h1 {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }

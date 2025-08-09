@@ -86,6 +86,7 @@ export const updateTrip = async (id, tripData) => {
 };
 
 export const deleteTrip = async (id) => {
+  console.log(id);
   try {
     const response = await fetch(`${API_URL}/trips/${id}`, {
       method: 'DELETE',
