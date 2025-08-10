@@ -23,11 +23,25 @@
 }
 
 .trip-form {
-  width: 600px;
+  width: 80%;
+}
+
+.form-group-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-group-info {
+  width: 50%;
 }
 
 .form-group {
   margin-bottom: 1.8rem;
+}
+
+.form-group-image {
+  width: 40%;
 }
 
 .form-group label {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getTrip, updateTrip, createTrip, uploadImage } from '../../services/tripService';
 import './TripPage.css';
+import emptyImage from '../../images/emptyImage.jpg';
 
 const TripPage = () => {
   const { id } = useParams();
@@ -189,29 +190,84 @@ const TripPage = () => {
       {success && <div className="success-message">{success}</div>}
       
       <form onSubmit={handleSubmit} className="trip-form">
-        <div className="form-group">
-          <label>Nombre del Viaje</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        
-        <div className="form-group">
-          <label>Categoría</label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleInputChange}
-            required
-          >
-            {categories.map(category => (
-              <option key={category} value={category}>{category}</option>
-            ))}
-          </select>
+
+        <div className="form-group-top">
+          <div className="form-group-info">
+            <div className="form-group">
+              <label>Nombre del Viaje</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            
+            <div className="form-group">
+              <label>Categoría</label>
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleInputChange}
+                required
+              >
+                {categories.map(category => (
+                  <option key={category} value={category}>{category}</option>
+                ))}
+              </select>
+            </div>
+          
+            <div className="form-group">
+              <label>Precio</label>
+              <div className="price-input">
+                <select
+                  name="currency"
+                  value={formData.currency}
+                  onChange={handleInputChange}
+                  className="currency-select"
+                >
+                  {currencies.map(currency => (
+                    <option key={currency.value} value={currency.value}>
+                      {currency.label}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="text"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                  min="0"
+                  step="0.01"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <div className="file-input-container">
+                <label>Imagen del Viaje</label>
+                <div className="file-input-container">
+                  <input
+                    type="file"
+                    id="image-upload"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="file-input"
+                  />
+                  <label htmlFor="image-upload" className="file-input-label">
+                    {uploadingImage ? 'Subiendo...' : 'Seleccionar Imagen'}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="image-upload">
+            <div className="image-preview">
+              <img src={imagePreview || emptyImage} alt="Vista previa" />
+            </div>
+          </div>
         </div>
         
         <div className="form-group">
@@ -239,34 +295,7 @@ const TripPage = () => {
             Agregar Fecha
           </button>
         </div>
-        
-        <div className="form-group">
-          <label>Precio</label>
-          <div className="price-input">
-            <select
-              name="currency"
-              value={formData.currency}
-              onChange={handleInputChange}
-              className="currency-select"
-            >
-              {currencies.map(currency => (
-                <option key={currency.value} value={currency.value}>
-                  {currency.label}
-                </option>
-              ))}
-            </select>
-            <input
-              type="text"
-              name="price"
-              value={formData.price}
-              onChange={handleInputChange}
-              min="0"
-              step="0.01"
-              required
-            />
-          </div>
-        </div>
-        
+
         <div className="form-group">
           <label>Comodidades</label>
           <div className="amenities-container">
@@ -303,29 +332,6 @@ const TripPage = () => {
                 )
               ))}
             </ul>
-          </div>
-        </div>
-        
-        <div className="form-group">
-          <label>Imagen del Viaje</label>
-          <div className="image-upload">
-            {imagePreview && (
-              <div className="image-preview">
-                <img src={imagePreview} alt="Vista previa" />
-              </div>
-            )}
-            <div className="file-input-container">
-              <input
-                type="file"
-                id="image-upload"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="file-input"
-              />
-              <label htmlFor="image-upload" className="file-input-label">
-                {uploadingImage ? 'Subiendo...' : 'Seleccionar Imagen'}
-              </label>
-            </div>
           </div>
         </div>
         
