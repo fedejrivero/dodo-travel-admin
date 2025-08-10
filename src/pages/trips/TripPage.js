@@ -149,12 +149,13 @@ const TripPage = () => {
     try {
       // Filter out empty amenities
       const filteredAmenities = formData.amenities.filter(amenity => amenity.trim() !== '');
+      const filteredDates = formData.dates.filter(date => date.trim() !== '');
       console.log(filteredAmenities);
       const tripData = {
         ...formData,
         amenities: filteredAmenities,
         price: Number(formData.price),
-        dates: formData.dates.filter(date => date)
+        dates: filteredDates
       };
       console.log(tripData);
       if (id) {
@@ -282,7 +283,7 @@ const TripPage = () => {
               <button
                 type="button"
                 onClick={addDate}
-                disabled={!formData.currentDate.trim()}
+                disabled={!formData.currentDate}
                 className="add-button"
               >
                 Agregar
@@ -321,7 +322,7 @@ const TripPage = () => {
               <button
                 type="button"
                 onClick={addAmenity}
-                disabled={!formData.currentAmenity.trim()}
+                disabled={!formData.currentAmenity}
                 className="add-button"
               >
                 Agregar
