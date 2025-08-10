@@ -4,8 +4,8 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import Login from './pages/auth/Login';
 import './App.css';
 import Layout from './components/layout';
-import Trip from './pages/trips/Trip';
-import Trips from './pages/trips/Trips';
+import TripPage from './pages/trips/TripPage';
+import TripsPage from './pages/trips/TripsPage';
 
 const AppContent = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -24,7 +24,7 @@ const AppContent = () => {
         <ProtectedRoute>
           <Layout>
             <main className="main-content">
-              <Trips />
+              <TripsPage />
             </main>
           </Layout>
         </ProtectedRoute>
@@ -34,7 +34,7 @@ const AppContent = () => {
         <ProtectedRoute>
           <Layout>
             <main className="main-content">
-              <Trips />
+              <TripsPage />
             </main>
           </Layout>
         </ProtectedRoute>
@@ -44,7 +44,7 @@ const AppContent = () => {
         <ProtectedRoute>
           <Layout>
             <main className="main-content">
-              <Trip />
+              <TripPage />
             </main>
           </Layout>
         </ProtectedRoute>
@@ -54,7 +54,7 @@ const AppContent = () => {
         <ProtectedRoute>
           <Layout>
             <main className="main-content">
-              <Trip />
+              <TripPage />
             </main>
           </Layout>
         </ProtectedRoute>

@@ -109,6 +109,7 @@
   flex-wrap: wrap;
   gap: 2rem;
   padding: 1rem 0;
+  justify-content: center;
 }
 
 .trip-image {

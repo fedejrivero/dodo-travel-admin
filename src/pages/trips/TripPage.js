@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getTrip, updateTrip, createTrip, uploadImage } from '../../services/tripService';
-import './Trip.css';
+import './TripPage.css';
 
-const Trip = () => {
+const TripPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -351,4 +351,4 @@ const Trip = () => {
   );
 };
 
-export default Trip;
+export default TripPage;

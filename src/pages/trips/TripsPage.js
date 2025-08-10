@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getTrips, deleteTrip } from '../../services/tripService';
-import './Trips.css';
+import './TripsPage.css';
 import Trip from '../../components/trip';
 
 const CATEGORIES = ['Nacional Bus', 'Nacional Aereo', 'Internacional', 'Grupal'];
 
-const Trips = () => {
+const TripsPage = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [trips, setTrips] = useState([]);
@@ -125,4 +125,4 @@ const Trips = () => {
   );
 };
 
-export default Trips;
+export default TripsPage;
