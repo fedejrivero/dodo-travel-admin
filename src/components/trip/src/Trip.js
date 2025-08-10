@@ -61,8 +61,8 @@ const Trip = ({
           <h3>{price}</h3>
         </div>
         <div className="trip-actions">
-          <button onClick={() => navigate(`/paquete/${id}`)}>Editar</button>
-          <button onClick={onDeleteTrip}>Eliminar</button>
+          <button className="icon-button" onClick={() => navigate(`/paquete/${id}`)} title="Editar">✏️</button>
+          <button className="icon-button" onClick={onDeleteTrip} title="Eliminar">🗑️</button>
         </div>
       </div>
     </div>

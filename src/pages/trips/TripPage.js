@@ -256,7 +256,7 @@ const TripPage = () => {
               ))}
             </select>
             <input
-              type="number"
+              type="text"
               name="price"
               value={formData.price}
               onChange={handleInputChange}

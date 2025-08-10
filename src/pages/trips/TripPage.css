@@ -22,6 +22,10 @@
   font-size: 1.8rem;
 }
 
+.trip-form {
+  width: 600px;
+}
+
 .form-group {
   margin-bottom: 1.8rem;
 }
@@ -90,50 +94,182 @@
   border-left: 4px solid #16a34a;
 }
 
+/* ===== Button Styles ===== */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+/* Primary Button */
+.submit-button,
+button[type="submit"] {
+  background-color: #2563eb;
+  color: white;
+  border: 2px solid transparent;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.submit-button:hover:not(:disabled),
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.submit-button:active,
+button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button */
+.cancel-button,
+button[type="button"] {
+  background-color: #f8fafc;
+  color: #334155;
+  border: 2px solid #e2e8f0;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.cancel-button:hover:not(:disabled),
+button[type="button"]:hover:not(:disabled) {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+/* Danger Button */
+.remove-button,
+button.remove-button {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 2px solid #fecaca;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.remove-button:hover:not(:disabled),
+button.remove-button:hover:not(:disabled) {
+  background-color: #fecaca;
+  border-color: #fca5a5;
+}
+
+/* Add Button */
+.add-button,
+button.add-button {
+  background-color: #e0f2fe;
+  color: #0369a1;
+  border: 2px solid #bae6fd;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.add-button:hover:not(:disabled),
+button.add-button:hover:not(:disabled) {
+  background-color: #bae6fd;
+  border-color: #7dd3fc;
+}
+
+/* Disabled State */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Button Sizes */
+button.small {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+button.large {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
 /* Form Actions */
 .form-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
   margin-top: 2.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid #e2e8f0;
 }
 
-.cancel-btn,
-.submit-btn {
-  padding: 0.75rem 1.5rem;
+/* File Input Button */
+.file-input-label {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #f8fafc;
+  border: 2px dashed #cbd5e1;
   border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 500;
+  color: #4b5563;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.cancel-btn {
-  background: #f1f5f9;
-  color: #475569;
-  border: 1px solid #cbd5e1;
+.file-input-label:hover {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
 }
 
-.cancel-btn:hover:not(:disabled) {
-  background: #e2e8f0;
+.file-input {
+  display: none;
 }
 
-.submit-btn {
-  background: #2563eb;
-  color: white;
-  border: none;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+/* Date Input Group Buttons */
+.date-input-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
 }
 
-.submit-btn:hover:not(:disabled) {
-  background: #1d4ed8;
+.date-input-group input[type="date"] {
+  flex: 1;
 }
 
-.submit-btn:disabled {
-  background: #bfdbfe;
-  cursor: not-allowed;
+/* Amenities List Buttons */
+.amenities-list button {
+  padding: 0.25rem 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding-bottom: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Hover Effects */
+button:not(:disabled) {
+  transition: all 0.2s ease;
+}
+
+button:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+button:not(:disabled):active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 /* Date Input Styles */
@@ -189,7 +325,7 @@
 }
 
 /* Price Input Styles */
-.price-input-container {
+.price-input {
   position: relative;
   display: flex;
   align-items: center;
@@ -202,7 +338,7 @@
   font-weight: 500;
 }
 
-.price-input-container input[type="number"] {
+.price-input input[type="number"] {
   padding-left: 3rem;
 }
 
@@ -212,6 +348,12 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
+}
+
+.amenity-input {
+  margin-bottom: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .amenity-item {
@@ -298,6 +440,48 @@
 .trip-category.grupal {
   background-color: #f0fdf4;
   color: #166534;
+}
+
+/* Trip Actions */
+.trip-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+.trip-actions .icon-button {
+  background: none;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: all 0.2s ease;
+  background-color: #f8fafc;
+  padding: 0;
+}
+
+.trip-actions .icon-button:hover {
+  background-color: #f1f5f9;
+  transform: translateY(-1px);
+}
+
+.trip-actions .icon-button:active {
+  transform: translateY(0);
+}
+
+.trip-actions .icon-button:first-child {
+  color: #2563eb;
+  border-color: #bfdbfe;
+}
+
+.trip-actions .icon-button:last-child {
+  color: #dc2626;
+  border-color: #fecaca;
 }
 
 /* Image Upload */
@@ -486,13 +670,13 @@
   }
   
   /* Stack price input and currency on mobile */
-  .price-input-container {
+  .price-input {
     flex-direction: column;
     gap: 0.5rem;
   }
   
-  .price-input-container input[type="number"] {
-    padding-left: 1rem;
+  .currency-select {
+    width: 20%;
   }
   
   .currency-symbol {
