@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getTrip, updateTrip, createTrip, uploadImage } from '../../services/tripService';
 import './TripPage.css';
 import emptyImage from '../../images/emptyImage.jpg';
+import { format, parseISO } from 'date-fns';
 
 const TripPage = () => {
   const { id } = useParams();
@@ -10,7 +11,8 @@ const TripPage = () => {
   const [formData, setFormData] = useState({
     name: '',
     category: 'Nacional Bus',
-    dates: [new Date().toISOString().split('T')[0]],
+    dates: [''],
+    currentDate: '',
     price: '',
     currency: '$',
     amenities: [''],
@@ -37,11 +39,7 @@ const TripPage = () => {
       const fetchTrip = async () => {
         try {
           const trip = await getTrip(id);
-          setFormData({
-            ...trip,
-            currentAmenity: '',
-            dates: trip.dates && trip.dates.length > 0 ? trip.dates : [new Date().toISOString().split('T')[0]]
-          });
+          setFormData({ ...trip });
           if (trip.image_url) {
             setImagePreview(trip.image_url);
           }
@@ -67,19 +65,20 @@ const TripPage = () => {
     }));
   };
 
-  const handleDateChange = (index, value) => {
-    const newDates = [...formData.dates];
-    newDates[index] = value;
+  const handleDateChange = (e) => {
     setFormData(prev => ({
       ...prev,
-      dates: newDates
+      currentDate: e.target.value
     }));
   };
 
   const addDate = () => {
+    if (!formData.currentDate.trim()) return;
+    
     setFormData(prev => ({
       ...prev,
-      dates: [...prev.dates, '']
+      dates: [...prev.dates, formData.currentDate],
+      currentDate: ''
     }));
   };
 
@@ -272,28 +271,41 @@ const TripPage = () => {
         
         <div className="form-group">
           <label>Fechas</label>
-          {formData.dates.map((date, index) => (
-            <div key={index} className="date-input-group">
+          <div className="dates-container">
+            <div className="dates-input">
               <input
                 type="date"
-                value={date}
-                onChange={(e) => handleDateChange(index, e.target.value)}
-                required
+                value={formData.currentDate}
+                onChange={handleDateChange}
+                placeholder="Agregar fecha"
               />
-              {formData.dates.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeDate(index)}
-                  className="remove-button"
-                >
-                  Eliminar
-                </button>
-              )}
+              <button
+                type="button"
+                onClick={addDate}
+                disabled={!formData.currentDate.trim()}
+                className="add-button"
+              >
+                Agregar
+              </button>
             </div>
-          ))}
-          <button type="button" onClick={addDate} className="add-button">
-            Agregar Fecha
-          </button>
+            
+            <ul className="dates-list">
+              {formData.dates.map((date, index) => (
+                date && (
+                  <li key={index} className="date-item">
+                    {format(parseISO(date), 'dd/MM/yyyy')}
+                    <button
+                      type="button"
+                      onClick={() => removeDate(index)}
+                      className="remove-button"
+                    >
+                      ×
+                    </button>
+                  </li>
+                )
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div className="form-group">
