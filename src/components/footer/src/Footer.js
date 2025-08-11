@@ -1,4 +1,4 @@
-import dodoTravel from "../../../images/dodoTravelWhite.png";
+import logoDodoTravelWhite from "../../../images/logoDodoTravelWhite.png";
 import useIsMobile from "../../../hooks/useIsMobile";
 
 const Footer = () => {
@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <img src={dodoTravel} alt="dodoTravel" className="dodo-travel"/>
+        <img src={logoDodoTravelWhite} alt="dodoTravel" className="dodo-travel"/>
       </div>
 
       <div className="footer-content">

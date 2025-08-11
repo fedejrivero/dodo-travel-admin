@@ -244,7 +244,8 @@ const TripPage = () => {
                 />
               </div>
             </div>
-
+          </div>
+          <div className="image-upload">
             <div className="form-group">
               <div className="file-input-container">
                 <label>Imagen del Viaje</label>
@@ -262,8 +263,6 @@ const TripPage = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="image-upload">
             <div className="image-preview">
               <img src={imagePreview || emptyImage} alt="Vista previa" />
             </div>

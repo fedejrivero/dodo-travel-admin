@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
-import logo from '../../../images/logo.png';
+import logoWhite from '../../../images/logoWhite.png';
 import plumas from '../../../images/plumas.png';
 import dodoTravelWhite from '../../../images/dodoTravelWhite.png';
 import useIsMobile from '../../../hooks/useIsMobile';
@@ -67,6 +67,7 @@ const NavBar = () => {
     >
       <div className="navbar-header">
         <Link to="/" className="logo-container" onClick={closeMenu}>
+          <img src={logoWhite} alt="Logo" className="logo" />
           <img src={dodoTravelWhite} alt="Dodo Travel" className="dodo-travel" />
         </Link>
         
