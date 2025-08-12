@@ -41,9 +41,6 @@ const Trip = ({
           <div className="trip-dates">
             <h4>Salidas:</h4>
             {formatDates.join(' - ')}
-            {/* {dates.map((date, index) => (
-              <p key={index}>{format(parseISO(date), 'dd/MM/yyyy')}</p>
-            ))} */}
           </div>
         
           {amenities && amenities.length > 0 && (
