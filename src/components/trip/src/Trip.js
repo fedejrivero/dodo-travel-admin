@@ -19,6 +19,8 @@ const Trip = ({
   onDeleteTrip
 }) => {
   const navigate = useNavigate();
+  const formatDates = dates.map((date) => format(parseISO(date), 'dd/MM/yyyy'));
+
   return (
   <div key={id} className="trip-card"> 
       <div className="trip-card-header">
@@ -38,9 +40,10 @@ const Trip = ({
           </div>
           <div className="trip-dates">
             <h4>Salidas:</h4>
-            {dates.map((date, index) => (
+            {formatDates.join(' - ')}
+            {/* {dates.map((date, index) => (
               <p key={index}>{format(parseISO(date), 'dd/MM/yyyy')}</p>
-            ))}
+            ))} */}
           </div>
         
           {amenities && amenities.length > 0 && (
