@@ -1,9 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getTrip, updateTrip, createTrip, uploadImage } from '../../services/tripService';
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 import './TripPage.css';
 import emptyImage from '../../images/emptyImage.jpg';
 import { format, parseISO } from 'date-fns';
+
+// Helper function to get the cropped image
+function getCroppedImg(image, crop, fileName) {
+  return new Promise((resolve) => {
+    const canvas = document.createElement('canvas');
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = crop.width;
+    canvas.height = crop.height;
+
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+
+    canvas.toBlob((blob) => {
+      if (!blob) {
+        console.error('Canvas is empty');
+        return;
+      }
+      // @ts-ignore
+      blob.name = fileName;
+      const fileUrl = window.URL.createObjectURL(blob);
+      resolve({ file: blob, fileUrl });
+    }, 'image/jpeg', 0.9);
+  });
+}
 
 const TripPage = () => {
   const { id } = useParams();
@@ -23,6 +61,11 @@ const TripPage = () => {
   
   const [uploadingImage, setUploadingImage] = useState(false);
   const [imagePreview, setImagePreview] = useState('');
+  const [crop, setCrop] = useState(undefined);
+  const [completedCrop, setCompletedCrop] = useState(undefined);
+  const [imgSrc, setImgSrc] = useState('');
+  const [showCropModal, setShowCropModal] = useState(false);
+  const imgRef = useRef(null);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -116,12 +159,55 @@ const TripPage = () => {
     }));
   };
 
-  const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  const onSelectFile = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setCrop(undefined);
+      const reader = new FileReader();
+      reader.addEventListener('load', () => setImgSrc(reader.result || ''));
+      reader.readAsDataURL(e.target.files[0]);
+      setShowCropModal(true);
+    }
+  };
 
+  const onLoad = useCallback((img) => {
+    imgRef.current = img;
+  }, []);
+
+  const handleCropComplete = (crop) => {
+    setCompletedCrop(crop);
+  };
+
+  const handleCancelCrop = () => {
+    setShowCropModal(false);
+    setImgSrc('');
+    setCrop(null);
+    setCompletedCrop(null);
+  };
+
+  const handleSaveCrop = async () => {
     try {
+      if (!completedCrop?.width || !completedCrop?.height || !imgRef.current) {
+        throw new Error('Crop not complete');
+      }
+
       setUploadingImage(true);
+      setShowCropModal(false);
+      
+      // Get the cropped image
+      const croppedImage = await getCroppedImg(
+        imgRef.current,
+        completedCrop,
+        'cropped.jpg'
+      );
+
+      // Create a file from the cropped image
+      const file = new File(
+        [croppedImage.file],
+        `cropped-${Date.now()}.jpg`,
+        { type: 'image/jpeg' }
+      );
+
+      // Upload the cropped image
       const imageData = await uploadImage(file);
       
       setFormData(prev => ({
@@ -129,12 +215,17 @@ const TripPage = () => {
         image_url: imageData.imageUrl,
         image_filename: imageData.filename
       }));
-      console.log(imageData);
-      setImagePreview(URL.createObjectURL(file));
+      
+      setImagePreview(URL.createObjectURL(croppedImage.file));
       setError('');
+      
+      // Clean up
+      setImgSrc('');
+      setCrop(null);
+      setCompletedCrop(null);
     } catch (error) {
-      console.error('Error uploading image:', error);
-      setError('Error al cargar la imagen. Por favor, intente nuevamente.');
+      console.error('Error processing image:', error);
+      setError('Error al procesar la imagen. Por favor, intente nuevamente.');
     } finally {
       setUploadingImage(false);
     }
@@ -245,6 +336,7 @@ const TripPage = () => {
               </div>
             </div>
           </div>
+          
           <div className="image-upload">
             <div className="form-group">
               <div className="file-input-container">
@@ -254,18 +346,69 @@ const TripPage = () => {
                     type="file"
                     id="image-upload"
                     accept="image/*"
-                    onChange={handleImageUpload}
-                    className="file-input"
+                    onChange={onSelectFile}
+                    disabled={uploadingImage}
+                    style={{ display: 'none' }}
                   />
-                  <label htmlFor="image-upload" className="file-input-label">
-                    {uploadingImage ? 'Subiendo...' : 'Seleccionar Imagen'}
-                  </label>
                 </div>
+
+                <label htmlFor="image-upload" className="file-input-label">
+                  {uploadingImage ? 'Cargando...' : 'Seleccionar Imagen'}
+                </label>
               </div>
             </div>
+            
             <div className="image-preview">
-              <img src={imagePreview || emptyImage} alt="Vista previa" />
+              <img 
+                src={imagePreview || emptyImage} 
+                alt="Preview" 
+                className={`preview-image ${!imagePreview ? 'empty' : ''}`} 
+              />
             </div>
+            
+
+            {/* Crop Modal */}
+            {showCropModal && (
+              <div className="crop-modal-overlay">
+                <div className="crop-modal">
+                  <h3>Recortar Imagen</h3>
+                  <div className="crop-container">
+                    {!!imgSrc && (
+                      <ReactCrop
+                        crop={crop}
+                        onChange={(c) => setCrop(c)}
+                        onComplete={handleCropComplete}
+                        aspect={3 / 2}
+                      >
+                        <img
+                          ref={onLoad}
+                          alt="Crop me"
+                          src={imgSrc}
+                          style={{ maxWidth: '100%', maxHeight: '70vh' }}
+                        />
+                      </ReactCrop>
+                    )}
+                  </div>
+                  <div className="crop-actions">
+                    <button 
+                      type="button" 
+                      className="cancel-button"
+                      onClick={handleCancelCrop}
+                    >
+                      Cancelar
+                    </button>
+                    <button 
+                      type="button" 
+                      className="save-button"
+                      onClick={handleSaveCrop}
+                      disabled={!completedCrop?.width || !completedCrop?.height}
+                    >
+                      Recortar y Guardar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
         

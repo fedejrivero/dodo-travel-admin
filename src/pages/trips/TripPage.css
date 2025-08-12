@@ -540,6 +540,93 @@ button:not(:disabled):active {
 }
 
 /* Image Upload */
+/* Image Crop Modal */
+.crop-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.crop-modal {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.crop-modal h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.crop-container {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #f5f7fa;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.crop-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.crop-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.crop-actions .cancel-button {
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+.crop-actions .cancel-button:hover {
+  background-color: #e2e8f0;
+}
+
+.crop-actions .save-button {
+  background-color: #2563eb;
+  color: white;
+}
+
+.crop-actions .save-button:hover {
+  background-color: #1d4ed8;
+}
+
+.crop-actions .save-button:disabled {
+  background-color: #bfdbfe;
+  cursor: not-allowed;
+}
+
+/* Image Upload Container */
 .image-upload-container {
   position: relative;
   margin: 15px 0;
