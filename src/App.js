@@ -6,6 +6,7 @@ import './App.css';
 import Layout from './components/layout';
 import TripPage from './pages/trips/TripPage';
 import TripsPage from './pages/trips/TripsPage';
+import TripRatesPage from './pages/trips/TripRatesPage';
 
 const AppContent = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -55,6 +56,16 @@ const AppContent = () => {
           <Layout>
             <main className="main-content">
               <TripPage />
+            </main>
+          </Layout>
+        </ProtectedRoute>
+      } />
+      
+      <Route path="/paquete/:id/tarifas" element={
+        <ProtectedRoute>
+          <Layout>
+            <main className="main-content">
+              <TripRatesPage />
             </main>
           </Layout>
         </ProtectedRoute>

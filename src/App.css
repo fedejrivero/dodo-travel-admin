@@ -108,4 +108,6 @@ html, body, #root {
 @import "./components/title/index.scss"; 
 @import "./components/divider/index.scss"; 
 @import "./components/footer/index.scss"; 
-@import "./components/trip/index.scss"; 
+@import "./components/tripCard/index.scss"; 
+@import "./components/amenities/index.scss"; 
+@import "./components/rates/index.scss"; 

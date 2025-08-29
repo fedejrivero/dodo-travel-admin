@@ -215,6 +215,7 @@ button.large {
 
 /* Form Actions */
 .form-actions {
+  width: 100%;
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
@@ -252,7 +253,7 @@ button.large {
   align-items: center;
 }
 
-.dates-input {
+.rates-input {
   margin-bottom: 0.5rem;
   display: flex;
   gap: 0.5rem;
@@ -263,16 +264,16 @@ button.large {
 }
 
 
-/* Dates Styles */
-.dates-list {
+/* Rates Styles */
+.rates-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
-/* Dates List Buttons */
-.dates-list button {
+/* Rates List Buttons */
+.rates-list button {
   padding: 0.25rem 0.5rem;
   margin-left: 0.5rem;
   border-radius: 50%;
@@ -286,7 +287,7 @@ button.large {
   line-height: 1;
 }
 
-.date-item {
+.rate-item {
   background: #f1f5f9;
   border-radius: 20px;
   padding: 0.4rem 0.75rem 0.4rem 1rem;
@@ -327,19 +328,19 @@ button:not(:disabled):active {
   box-shadow: none;
 }
 
-/* Date Input Styles */
-.date-input-container {
+/* Rates Input Styles */
+.rates-input-container {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
   align-items: center;
 }
 
-.date-input-container input[type="date"] {
+.rates-input-container input[type="date"] {
   flex: 1;
 }
 
-.remove-date-btn {
+.remove-rate-btn {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   color: #64748b;
@@ -353,13 +354,13 @@ button:not(:disabled):active {
   transition: all 0.2s ease;
 }
 
-.remove-date-btn:hover {
+.remove-rate-btn:hover {
   background: #f1f5f9;
   color: #dc2626;
   border-color: #fecaca;
 }
 
-.add-date-btn {
+.add-rate-btn {
   background: #f8fafc;
   border: 1px dashed #cbd5e1;
   color: #4b5563;
@@ -374,7 +375,7 @@ button:not(:disabled):active {
   transition: all 0.2s ease;
 }
 
-.add-date-btn:hover {
+.add-rate-btn:hover {
   background: #f1f5f9;
   border-color: #94a3b8;
 }
@@ -772,12 +773,6 @@ button:not(:disabled):active {
     gap: 0.75rem;
     margin-top: 2rem;
     padding-top: 1.5rem;
-  }
-  
-  .cancel-btn,
-  .submit-btn {
-    width: 100%;
-    padding: 0.875rem 1.5rem;
   }
   
   /* Adjust form elements for mobile */

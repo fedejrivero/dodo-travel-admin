@@ -1,0 +1,248 @@
+  .error-message {
+    background-color: #fef2f2;
+    color: #b91c1c;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid #dc2626;
+  }
+  
+  .success-message {
+    background-color: #f0fdf4;
+    color: #166534;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid #16a34a;
+  }
+  
+  /* ===== Button Styles ===== */
+  button {
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    line-height: 1.5;
+  }
+  
+  /* Date Input Group Buttons */
+  .date-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    align-items: center;
+  }
+  
+  .rates-input {
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .date-input-group input[type="date"] {
+    flex: 1;
+  }
+  
+  
+  /* Rates Styles */
+  .rates-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Rates List Buttons */
+  .rates-list button {
+    padding: 0.25rem 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding-bottom: 0.35rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  
+  .rate-item {
+    background: #f1f5f9;
+    border-radius: 20px;
+    padding: 0.4rem 0.75rem 0.4rem 1rem;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #334155;
+  }
+  
+  /* Hover Effects */
+  button:not(:disabled) {
+    transition: all 0.2s ease;
+  }
+  
+  button:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  button:not(:disabled):active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  
+  /* Rates Input Styles */
+  .rates-input-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    align-items: center;
+  }
+  
+  .rates-input-container input[type="date"] {
+    flex: 1;
+  }
+  
+  .remove-rate-btn {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .remove-rate-btn:hover {
+    background: #f1f5f9;
+    color: #dc2626;
+    border-color: #fecaca;
+  }
+  
+  .add-rate-btn {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    color: #4b5563;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    transition: all 0.2s ease;
+  }
+  
+  .add-rate-btn:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .add-trip-container {
+      padding: 1rem 0.75rem;
+    }
+    
+    .add-trip-card {
+      padding: 1.5rem;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    
+    .add-trip-card h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-row {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .form-actions {
+      width: 100%;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+    }
+    
+    .cancel-btn,
+    .submit-btn {
+      width: 100%;
+      padding: 0.875rem 1.5rem;
+    }
+    
+    /* Adjust form elements for mobile */
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="date"],
+    .form-group select,
+    .form-group textarea {
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+    }
+    
+    /* Stack date inputs on mobile */
+    .date-input-container {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .date-input {
+      margin-bottom: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+  
+    .date-input-container input[type="date"] {
+      width: 100%;
+    }
+    
+    .remove-date-btn {
+      align-self: flex-end;
+    }
+    
+    /* Adjust amenities list for mobile */
+    .amenities-list {
+      gap: 0.5rem;
+    }
+    
+    .amenity-item {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.65rem 0.35rem 0.9rem;
+    }
+    
+    /* Stack price input and currency on mobile */
+    .price-input {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .currency-select {
+      width: 20%;
+    }
+    
+    .currency-symbol {
+      position: static;
+      margin-bottom: 0.25rem;
+    }
+  }
+  

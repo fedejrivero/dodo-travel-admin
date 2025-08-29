@@ -1,4 +1,5 @@
-const API_URL = 'https://srv942210.hstgr.cloud/api';
+// const API_URL = 'https://srv942210.hstgr.cloud/api';
+const API_URL = 'http://localhost:5001/api';
 
 // Helper function to handle API responses
 const handleResponse = async (response) => {
@@ -37,9 +38,6 @@ export const createTrip = async (tripData) => {
     const formattedData = {
       ...tripData,
       price: Number(tripData.price),
-      dates: Array.isArray(tripData.dates) 
-        ? tripData.dates 
-        : [tripData.dates].filter(Boolean),
       image_url: tripData.image_url || null
     };
 
@@ -86,7 +84,6 @@ export const updateTrip = async (id, tripData) => {
 };
 
 export const deleteTrip = async (id) => {
-  console.log(id);
   try {
     const response = await fetch(`${API_URL}/trips/${id}`, {
       method: 'DELETE',

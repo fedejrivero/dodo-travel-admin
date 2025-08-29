@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getTrip, updateTrip, createTrip, uploadImage } from '../../services/tripService';
+import { getTrip, updateTrip, createTrip, uploadImage, deleteTrip } from '../../services/tripService';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import './TripPage.css';
 import emptyImage from '../../images/emptyImage.jpg';
-import { format, parseISO } from 'date-fns';
 
 // Helper function to get the cropped image
 function getCroppedImg(image, crop, fileName) {
@@ -58,7 +57,7 @@ const TripPage = () => {
     image_url: '',
     image_filename: ''
   });
-  
+
   const [uploadingImage, setUploadingImage] = useState(false);
   const [imagePreview, setImagePreview] = useState('');
   const [crop, setCrop] = useState(undefined);
@@ -105,32 +104,6 @@ const TripPage = () => {
     setFormData(prev => ({
       ...prev,
       [name]: value
-    }));
-  };
-
-  const handleDateChange = (e) => {
-    setFormData(prev => ({
-      ...prev,
-      currentDate: e.target.value
-    }));
-  };
-
-  const addDate = () => {
-    if (!formData.currentDate.trim()) return;
-    
-    setFormData(prev => ({
-      ...prev,
-      dates: [...prev.dates, formData.currentDate],
-      currentDate: ''
-    }));
-  };
-
-  const removeDate = (index) => {
-    if (formData.dates.length <= 1) return;
-    const newDates = formData.dates.filter((_, i) => i !== index);
-    setFormData(prev => ({
-      ...prev,
-      dates: newDates
     }));
   };
 
@@ -241,26 +214,26 @@ const TripPage = () => {
       // Filter out empty amenities
       const filteredAmenities = formData.amenities.filter(amenity => amenity.trim() !== '');
       const filteredDates = formData.dates.filter(date => date.trim() !== '');
-      console.log(filteredAmenities);
+
       const tripData = {
         ...formData,
         amenities: filteredAmenities,
         price: Number(formData.price),
         dates: filteredDates
       };
-      console.log(tripData);
+
       if (id) {
         await updateTrip(id, tripData);
         setSuccess('¡Viaje actualizado exitosamente!');
       } else {
-        await createTrip(tripData);
+        const trip = await createTrip(tripData);
+
         setSuccess('¡Viaje creado exitosamente!');
+
+        setTimeout(() => {
+          navigate(`/paquete/${trip.id}/tarifas`);
+        }, 1000);
       }
-      
-     
-      setTimeout(() => {
-        navigate('/paquetes');
-      }, 1500);
     } catch (error) {
       console.error('Error updating trip:', error);
       setError(error.message || 'Error al actualizar el viaje. Por favor, intente nuevamente.');
@@ -276,9 +249,6 @@ const TripPage = () => {
   return (
     <div className="page-content new-trip-container">
       {id ? <h1>Editar Viaje</h1> : <h1>Crear Viaje</h1>}
-      
-      {error && <div className="error-message">{error}</div>}
-      {success && <div className="success-message">{success}</div>}
       
       <form onSubmit={handleSubmit} className="trip-form">
 
@@ -411,45 +381,6 @@ const TripPage = () => {
             )}
           </div>
         </div>
-        
-        <div className="form-group">
-          <label>Fechas</label>
-          <div className="dates-container">
-            <div className="dates-input">
-              <input
-                type="date"
-                value={formData.currentDate}
-                onChange={handleDateChange}
-                placeholder="Agregar fecha"
-              />
-              <button
-                type="button"
-                onClick={addDate}
-                disabled={!formData.currentDate}
-                className="add-button"
-              >
-                Agregar
-              </button>
-            </div>
-            
-            <ul className="dates-list">
-              {formData.dates.map((date, index) => (
-                date && (
-                  <li key={index} className="date-item">
-                    {format(parseISO(date), 'dd/MM/yyyy')}
-                    <button
-                      type="button"
-                      onClick={() => removeDate(index)}
-                      className="remove-button"
-                    >
-                      ×
-                    </button>
-                  </li>
-                )
-              ))}
-            </ul>
-          </div>
-        </div>
 
         <div className="form-group">
           <label>Comodidades</label>
@@ -490,10 +421,34 @@ const TripPage = () => {
           </div>
         </div>
         
-        <div className="form-actions">
+        {id && (
           <button
             type="button"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(`/paquete/${id}/tarifas`)}
+            className="view-button"
+            disabled={isSubmitting}
+          >
+            Ver fechas y disponibilidad
+          </button>
+        )}
+
+        {error && <div className="error-message">{error}</div>}
+        {success && <div className="success-message">{success}</div>}
+
+        <div className="form-actions">
+          {id && (
+            <button
+              type="button"
+              onClick={() => {deleteTrip(id); navigate(-1)}}
+              className="remove-button"
+              disabled={isSubmitting}
+            >
+              Eliminar
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => navigate('/paquetes')}
             className="cancel-button"
             disabled={isSubmitting}
           >

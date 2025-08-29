@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getTrips, deleteTrip } from '../../services/tripService';
 import './TripsPage.css';
-import Trip from '../../components/trip';
+import TripCard from '../../components/tripCard';
 
 const CATEGORIES = ['Nacional Bus', 'Nacional Aereo', 'Internacional', 'Grupal'];
 
@@ -112,7 +112,7 @@ const TripsPage = () => {
             </div>
           ) : (
             filteredTrips.map((trip) => (
-            <Trip 
+            <TripCard 
               key={trip.id}
               {...trip}
               onDeleteTrip={() => handleDeleteTrip(trip.id)}
