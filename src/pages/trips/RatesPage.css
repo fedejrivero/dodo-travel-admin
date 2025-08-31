@@ -1,0 +1,10 @@
+@media (max-width: 768px) {
+  .rates-form {
+    padding: 2rem 2rem 0;
+    gap: 1rem;
+  }
+
+  .rates-list {
+    padding: 1rem;
+  }
+}

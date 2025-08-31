@@ -5,6 +5,7 @@ import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import './TripPage.css';
 import emptyImage from '../../images/emptyImage.jpg';
+import { deleteRatesByTripId } from '../../services/rateService';
 
 // Helper function to get the cropped image
 function getCroppedImg(image, crop, fileName) {
@@ -48,7 +49,7 @@ const TripPage = () => {
   const [formData, setFormData] = useState({
     name: '',
     category: 'Nacional Bus',
-    dates: [''],
+    description: '',
     currentDate: '',
     price: '',
     currency: '$',
@@ -204,6 +205,18 @@ const TripPage = () => {
     }
   };
 
+  const handleDeleteTrip = async (id) => {
+    try {
+      await deleteTrip(id);
+      await deleteRatesByTripId(id);
+
+      navigate('/paquetes');
+    } catch (error) {
+      console.error('Error deleting trip:', error);
+      setError('Error al eliminar el viaje. Por favor, intente nuevamente.');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -213,13 +226,11 @@ const TripPage = () => {
     try {
       // Filter out empty amenities
       const filteredAmenities = formData.amenities.filter(amenity => amenity.trim() !== '');
-      const filteredDates = formData.dates.filter(date => date.trim() !== '');
 
       const tripData = {
         ...formData,
         amenities: filteredAmenities,
         price: Number(formData.price),
-        dates: filteredDates
       };
 
       if (id) {
@@ -383,6 +394,17 @@ const TripPage = () => {
         </div>
 
         <div className="form-group">
+          <label>Descripción</label>
+          <input
+            type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            placeholder="Agregar descripción"
+          />
+        </div>
+
+        <div className="form-group">
           <label>Comodidades</label>
           <div className="amenities-container">
             <div className="amenity-input">
@@ -439,7 +461,7 @@ const TripPage = () => {
           {id && (
             <button
               type="button"
-              onClick={() => {deleteTrip(id); navigate(-1)}}
+              onClick={() => handleDeleteTrip(id) }
               className="remove-button"
               disabled={isSubmitting}
             >

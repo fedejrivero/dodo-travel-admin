@@ -1,5 +1,5 @@
-const API_URL = 'http://localhost:5001/api';
-// const API_URL = 'https://srv942210.hstgr.cloud/api';
+// const API_URL = 'http://localhost:5001/api';
+const API_URL = 'https://srv942210.hstgr.cloud/api';
 
 /**
  * Fetches rates for a specific trip by its ID
@@ -30,12 +30,18 @@ export const getRatesByTripId = async (tripId) => {
 
 export const createRate = async (rateData) => {
   try {
+    const formattedData = {
+      ...rateData,
+      assist: !!(rateData.assist) ? 1 : 0,
+      excursions:!!(rateData.excursions) ? 1 : 0,
+    };
+
     const response = await fetch(`${API_URL}/rates`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(rateData),
+      body: JSON.stringify(formattedData),
     });
 
     if (!response.ok) {
@@ -64,6 +70,24 @@ export const deleteRate = async (rateId) => {
     return await response.json();
   } catch (error) {
     console.error('Error deleting rate:', error);
+    throw error;
+  }
+};
+
+export const deleteRatesByTripId = async (tripId) => {
+  try {
+    const response = await fetch(`${API_URL}/rates/trip/${tripId}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || 'Failed to delete rates');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error deleting rates:', error);
     throw error;
   }
 };
