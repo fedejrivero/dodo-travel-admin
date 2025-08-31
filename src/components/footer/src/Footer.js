@@ -9,12 +9,14 @@ const Footer = () => {
       <div className="footer-content">
         <img src={logoDodoTravelWhite} alt="dodoTravel" className="dodo-travel"/>
       </div>
-
-      <div className="footer-content">
-        <div className="footer-text">
-          <p>Te ayudamos a volar!</p>
+      
+      {!isMobile && (
+        <div className="footer-content">
+          <div className="footer-text">
+            <p>Te ayudamos a volar!</p>
+          </div>
         </div>
-      </div>
+      )}
 
       {!isMobile && (
         <div className="footer-content">

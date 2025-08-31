@@ -694,6 +694,7 @@ button:not(:disabled):active {
 }
 
 .image-preview {
+    max-width: 100%;
     width: 300px;
     height: 200px;
     display: flex;
