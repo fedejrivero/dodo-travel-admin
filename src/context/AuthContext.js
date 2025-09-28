@@ -1,5 +1,10 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+// const API_URL = 'http://localhost:5001/api';
+const API_URL = 'https://srv942210.hstgr.cloud/api';
+axios.defaults.baseURL = API_URL;
 
 const AuthContext = createContext(null);
 
@@ -9,39 +14,83 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check for existing session on initial load
-    const token = localStorage.getItem('token');
-    const userData = localStorage.getItem('user');
-    
-    if (token && userData) {
-      setUser(JSON.parse(userData));
-    }
-    setLoading(false);
-  }, []);
+    const checkAuth = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        
+        if (token) {
+          // Set auth token in axios headers
+          axios.defaults.headers.common['x-auth-token'] = token;
+          
+          // Fetch user data
+          const response = await axios.get(`${API_URL}/auth/me`);
+          setUser(response.data);
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        // Clear invalid token
+        delete axios.defaults.headers.common['x-auth-token'];
+        localStorage.removeItem('token');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
+
+    // Axios interceptor to catch 401 and force logout
+    const interceptorId = axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error?.response?.status === 401) {
+          delete axios.defaults.headers.common['x-auth-token'];
+          localStorage.removeItem('token');
+          setUser(null);
+          if (window.location.pathname !== '/login') {
+            navigate('/login');
+          }
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      axios.interceptors.response.eject(interceptorId);
+    };
+  }, [navigate]);
 
   const login = async (email, password) => {
     try {
-      // In a real app, this would be an API call
-      // For demo purposes, we'll use hardcoded credentials
-      if (email === 'admin@dodotravel.com' && password === 'admin123') {
-        const userData = { email, name: 'Admin' };
-        localStorage.setItem('token', 'dummy-jwt-token');
-        localStorage.setItem('user', JSON.stringify(userData));
-        setUser(userData);
-        return { success: true };
-      }
-      return { success: false, error: 'Invalid credentials' };
+      const response = await axios.post(`${API_URL}/auth/login`, { email, password });
+      
+      // Save token to localStorage and axios headers
+      const { token, user } = response.data;
+      localStorage.setItem('token', token);
+      axios.defaults.headers.common['x-auth-token'] = token;
+      
+      // Update user state
+      setUser(user);
+      
+      return { success: true };
     } catch (error) {
       console.error('Login error:', error);
-      return { success: false, error: 'An error occurred during login' };
+      const errorMessage = error.response?.data?.message || 'An error occurred during login';
+      return { success: false, error: errorMessage };
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setUser(null);
-    navigate('/login');
+  const logout = async () => {
+    try {
+      await axios.post(`${API_URL}/auth/logout`);
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      // Clear auth state
+      delete axios.defaults.headers.common['x-auth-token'];
+      localStorage.removeItem('token');
+      setUser(null);
+      navigate('/login');
+    }
   };
 
   const value = {

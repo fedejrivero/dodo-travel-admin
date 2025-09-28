@@ -30,7 +30,8 @@ const Login = () => {
         setError(result.error || 'Failed to log in');
       }
     } catch (err) {
-      setError('An error occurred during login');
+      const errorMessage = err.response?.data?.message || 'An error occurred during login';
+      setError(errorMessage);
       console.error('Login error:', err);
     } finally {
       setLoading(false);
