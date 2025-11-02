@@ -67,9 +67,14 @@ const RatesPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let newValue = value;
+    if (name === 'assist' || name === 'excursions') {
+      newValue = !rateFormData[name];
+    }
+
     setRateFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: newValue
     }));
   };
 
@@ -101,8 +106,8 @@ const RatesPage = () => {
         hotel: '',
         date: '',
         nights: '',
-        busBed: null,
-        regime: null,
+        busBed: '',
+        regime: '',
         assist: false,
         excursions: false,
         price: '',
@@ -142,7 +147,7 @@ const RatesPage = () => {
             <div className="form-group">
               <label>Fecha</label>
               <input
-                type="date"
+                type="text"
                 name="date"
                 value={rateFormData.date}
                 onChange={handleChange}
@@ -252,7 +257,7 @@ const RatesPage = () => {
               <button
                 type="button"
                 onClick={handleSubmit}
-                disabled={!rateFormData.date || !rateFormData.hotel || !rateFormData.price}
+                disabled={!rateFormData.date || !rateFormData.hotel || !rateFormData.price || !rateFormData.regime}
                 className="add-button"
               >
                 Agregar

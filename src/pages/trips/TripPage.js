@@ -13,6 +13,7 @@ const TripPage = () => {
     category: 'Nacional Bus',
     description: '',
     currentDate: '',
+    dates: '',
     price: '',
     currency: '$',
     amenities: [''],
@@ -261,6 +262,17 @@ const TripPage = () => {
             value={formData.description}
             onChange={handleInputChange}
             placeholder="Agregar descripción"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Fechas</label>
+          <input
+            type="text"
+            name="dates"
+            value={formData.dates}
+            onChange={handleInputChange}
+            placeholder="Agregar fechas"
           />
         </div>
 

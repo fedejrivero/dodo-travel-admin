@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.39d20dbf.css",
-    "main.js": "/static/js/main.1493c98c.js",
+    "main.css": "/static/css/main.8a4d852a.css",
+    "main.js": "/static/js/main.8c6ac9e5.js",
     "static/js/453.d3a9d793.chunk.js": "/static/js/453.d3a9d793.chunk.js",
     "static/media/plumas.png": "/static/media/plumas.03bc745552b33362b937.png",
     "static/media/emptyImage.jpg": "/static/media/emptyImage.475cde71b4511ee82372.jpg",
@@ -9,12 +9,12 @@
     "static/media/logoDodoTravelWhite.png": "/static/media/logoDodoTravelWhite.95126bfb2fdd4b178c1e.png",
     "static/media/dodoTravelWhite.png": "/static/media/dodoTravelWhite.72c9c13c9f9521e2a3aa.png",
     "index.html": "/index.html",
-    "main.39d20dbf.css.map": "/static/css/main.39d20dbf.css.map",
-    "main.1493c98c.js.map": "/static/js/main.1493c98c.js.map",
+    "main.8a4d852a.css.map": "/static/css/main.8a4d852a.css.map",
+    "main.8c6ac9e5.js.map": "/static/js/main.8c6ac9e5.js.map",
     "453.d3a9d793.chunk.js.map": "/static/js/453.d3a9d793.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.39d20dbf.css",
-    "static/js/main.1493c98c.js"
+    "static/css/main.8a4d852a.css",
+    "static/js/main.8c6ac9e5.js"
   ]
 }

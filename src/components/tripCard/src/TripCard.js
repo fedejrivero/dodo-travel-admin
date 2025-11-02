@@ -11,6 +11,7 @@ const getCategoryClass = (category) => {
 const TripCard = ({
   id,
   name,
+  dates,
   category,
   price,
   currency,
@@ -35,6 +36,7 @@ const TripCard = ({
         <div className="trip-card-content">
           <div className="trip-card-title">
             <h3>{name}</h3>
+            {dates && <p className="trip-card-dates">{dates}</p>}
           </div>
 
           <div className="trip-card-amenities">

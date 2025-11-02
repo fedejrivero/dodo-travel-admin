@@ -38,6 +38,7 @@ export const createTrip = async (tripData) => {
     const formattedData = {
       ...tripData,
       price: Number(tripData.price),
+      dates: tripData.dates || '',
       image_url: tripData.image_url || null
     };
 
@@ -62,9 +63,7 @@ export const updateTrip = async (id, tripData) => {
     const formattedData = {
       ...tripData,
       price: Number(tripData.price),
-      dates: Array.isArray(tripData.dates) 
-        ? tripData.dates 
-        : [tripData.dates].filter(Boolean),
+      dates: tripData.dates || '',
       image_url: tripData.image_url || null
     };
 
